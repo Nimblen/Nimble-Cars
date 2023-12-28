@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+    {% if form.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                    style="margin-top: 50px;">
+                    {{ form.errors }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+    <div class="search_auto">
+        <form action="{% url 'users:register' %}" method="post">
+            {% csrf_token %}
+            <h2>Registration Form</h2>
+            <div class="input-group">
+                <label for="{{ form.first_name.id_for_label }}"><strong>First Name:</strong></label>
+                {{ form.first_name }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.last_name.id_for_label }}"><strong>Last Name:</strong></label>
+                {{ form.last_name }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.username.id_for_label }}"><strong>Username:</strong></label>
+                {{ form.username }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.email.id_for_label }}"><strong>Email:</strong></label>
+                {{ form.email }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.phone_number1.id_for_label }}"><strong>Phone Number 1:</strong></label>
+                {{ form.phone_number1 }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.phone_number2.id_for_label }}"><strong>Phone Number 2:</strong></label>
+                {{ form.phone_number2 }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.password1.id_for_label }}"><strong>Password: </strong></label>
+                {{ form.password1 }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.password2.id_for_label }}"><strong>Password confirmation: </strong></label>
+                {{ form.password2 }}
+            </div>
+            <div class="input-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+{% endblock %}

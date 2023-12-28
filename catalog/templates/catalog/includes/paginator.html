@@ -1,0 +1,16 @@
+<div class="pagination">
+    <ul>
+    {% if cars.has_previous %}
+                <li><a href="{% url 'catalog:paginator' cars.previous_page_number products_count %}"></a></li>
+        {% endif %}
+        {% for page in cars.paginator.page_range %}
+        {% url 'catalog:paginator' page products_count as url %}
+        <li {% if request.path == url %} class="active" {% endif %}><a class="page-link" href="{{ url }}">{{ page }}</a></li>
+        {% endfor %}
+        {% if  cars.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'catalog:paginator' cars.next_page_number products_count %}"></a>
+        </li>
+        {% endif %}
+    </ul>
+</div>

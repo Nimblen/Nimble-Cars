@@ -1,0 +1,17 @@
+						<ul class="catalog_list">
+							{% if cars %}
+							{% for car in cars %}
+							<li class="{% cycle '' 'second' 'last' %}">
+								<a href="{{ car.get_absolute_url }}">
+									<img src="{{ car.get_first_photo }}" alt=""/>
+									<div class="description">Registration: {{ car.fabrication }}<br/>Engine: {{car.engine}} {{car.fuel}}<br/>
+									Body: {{car.body_type}}</div>
+									<div class="title">{{car.brand}} {{car.car_model}}<span class="price">$ {{car.price}}</span></div>
+								</a>
+							</li>
+							{% endfor %}
+							{% else %}
+							<h3><strong> unfortunately there are no cars yet </strong></h3>
+							{% endif %}
+						</ul>
+

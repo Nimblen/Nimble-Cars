@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load catalog_tags %}
+{% block content %}
+	<!--BEGIN CONTENT-->
+    <div id="content">
+        <div class="content">
+            <div class="breadcrumbs">
+                <a href="{% url 'index' %}">Home</a>
+                <img src="{% static 'images/marker_2.gif' %}" alt=""/>
+                <span>Cars</span>
+                {{ brand }}
+            </div>
+            <div class="main_wrapper">
+                <h1><strong>Cars</strong> ({{ car_count }} results)</h1>
+                <div class="catalog_sidebar">
+
+                    {% include "catalog/includes/filter_car_form.html" %}
+
+                    {% comment %} <div class="calculator">
+                        <h3><strong>Loan</strong> calculator</h3>
+                        <form method="post">
+                        {% csrf_token %}
+                        <label><strong>Loan Amount:</strong></label>
+                        <div class="select_box_1">
+                            <select class="select_3">
+                                <option value="0">0.00 Euro</option>
+                                <option value="1">10.00 Euro</option>
+                                <option value="2">100.00 Euro</option>
+                                <option value="3">1000.00 Euro</option>
+                                <option value="4">10000.00 Euro</option>
+                                <option value="5">100000.00 Euro</option>
+                                <option value="6">1000000.00 Euro</option>
+                                <option value="7">10000000.00 Euro</option>
+                                <option value="8">100000000.00 Euro</option>
+                            </select>
+                        </div>
+                        <label><strong>Down Payment:</strong></label>
+                        <div class="select_box_1">
+                            <select class="select_3">
+                                <option value="0">0.00 Euro</option>
+                                <option value="1">10.00 Euro</option>
+                                <option value="2">100.00 Euro</option>
+                                <option value="3">1000.00 Euro</option>
+                                <option value="4">10000.00 Euro</option>
+                                <option value="5">100000.00 Euro</option>
+                                <option value="6">1000000.00 Euro</option>
+                                <option value="7">10000000.00 Euro</option>
+                                <option value="8">100000000.00 Euro</option>
+                            </select>
+                        </div>
+                        <label><strong>Annual Rate:</strong></label>
+                        <div class="select_box_1">
+                            <select class="select_3">
+                                <option value="0">0.00 %</option>
+                                <option value="1">10.00 %</option>
+                                <option value="2">20.00 %</option>
+                                <option value="3">30.00 %</option>
+                                <option value="4">40.00 %</option>
+                                <option value="5">50.00 %</option>
+                            </select>
+                        </div>
+                        <label><strong>Loan Period:</strong></label>
+                        <div class="select_box_1">
+                            <select class="select_3">
+                                <option value="0">3 Years</option>
+                                <option value="1">4 Years</option>
+                                <option value="2">5 Years</option>
+                                <option value="3">6 Years</option>
+                                <option value="4">7 Years</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="calculate" class="btn_calc"/>
+                    </form>
+                        <div class="clear"></div>
+                    </div> {% endcomment %}
+                </div>
+                <div class="main_catalog">
+                    <div class="top_catalog_box">
+                        <div class="switch">
+                            {% url 'catalog:catalog_list' as url %}
+                            {% if request.path == url %}
+                            <span class="table_view"></span>
+                            <a href="{% url 'catalog:catalog_grid' %}"  class="list_view"></a>
+                            {% else %}
+                            <a href="{% url 'catalog:catalog_list' %}" class="table_view"></a>
+                            <span class="list_view"></span>
+                            {% endif %}
+                        </div>
+                        <div class="sorting drop_list">
+                            <strong>Sort by: </strong>
+                            <div class="selected">
+                                <span><a href="?sort_by=date">Date</a></span>
+                                <ul>
+                                    <li><a href="?sort_by=date">Date</a></li>
+                                    <li><a href="?sort_by=price">Price</a></li>
+                                    <li><a href="?sort_by=name">Name</a></li>
+                                    <li><a href="?sort_by=brand">Manufacturer</a></li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="view_on_page drop_list">
+                            <strong>View on page:</strong>
+                            <div class="selected">
+                                <span>{% if products_count %} {{ products_count }} {% else %} 10 {% endif %}</span>
+                                <ul>
+                                    <p><a href="{% url 'catalog:paginator'  page_number=page_number per_page=10 %}">10</a></p>
+                                    <p><a href="{% url 'catalog:paginator'  page_number=page_number per_page=20 %}">20</a></p>
+                                    <p><a href="{% url 'catalog:paginator'  page_number=page_number per_page=50 %}">50</a></p>
+                                        <p><a href="{% url 'catalog:paginator'  page_number=page_number per_page=100 %}">100</a></p>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        {% include "catalog/includes/paginator.html" %}
+
+                        <div class="clear"></div>
+                        {% get_template 'n' as list_temp %}
+
+                        {% url 'catalog:catalog_list' as url %}
+                        {% if request.path == url %}
+                        {% include list_temp %}
+                        {% else %}
+                        {% get_template 'y' as grid_temp %}
+                        {% include grid_temp %}
+                        {% endif %}
+
+                    </div>
+                    <div class="bottom_catalog_box">
+                        {% include "catalog/includes/paginator.html" %}
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

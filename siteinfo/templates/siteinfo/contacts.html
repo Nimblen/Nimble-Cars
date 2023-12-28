@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+	<!--EOF HEADER-->
+	<!--BEGIN CONTENT-->
+	{% block content %}
+		<div id="content">
+			<div class="content">
+				<div class="breadcrumbs">
+					<a href="{% url 'index' %}">Home</a>
+					<img src="{% static 'images/marker_2.gif' %}" alt=""/>
+					<span>Contact Us</span>
+				</div>
+				<div class="main_wrapper">
+					<h1><strong>Contact</strong> Us</h1>
+					<div class="contacts_box">
+						<div class="left">
+							<h3><strong>Contact</strong> details</h3>
+							<div class="addr detail">Berlin, Germany, nr. 250330,<br/>main street</div>
+							<div class="phones detail">0040 742 016 756<br/>0040 742 016 756</div>
+							<div class="email detail single_line"><a href="mailto:#" class="markered">office@autodealer.com</a></div>
+							<div class="web detail single_line"><a href="#">http://www.autodealer.com</a></div>
+						</div>
+						<div class="f_widget divide last frame_wrapper">
+							<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d150426.93908224287!2d27.46565226380943!3d53.906495764505976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sgoogle!5e0!3m2!1sru!2sby!4v1698140290782!5m2!1sru!2sby" width="650" height="219" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+						</div>
+					</div>
+					<div class="contact_form">
+						<h2><strong>Drop</strong> us a line</h2>
+							<form action="{% url 'dealer:add_message' %}" method="post" >
+								{% csrf_token %}
+								<input type="hidden" name="parent"  value="">
+								<div class="fld_box">
+									<label>Name: </label>
+									<input type="text" name="name"  value=""/>
+								</div>
+								<div class="fld_box center">
+									<label>E-mail: </label>
+									<input type="text" name="email"  value=""/>
+								</div>
+								<div class="fld_box">
+									<label>Website: </label>
+									<input type="text"  name="website" value=""/>
+								</div>
+								<div class="clear"></div>
+								<label>Comment: </label>
+								<textarea cols="20"  name="body"  rows="20"></textarea>
+								<input type="submit" value="submit" class="submit"/>
+							</form>
+					</div>
+					{% comment %} <div class="personal_box">
+						<h2><strong>Sales</strong> reps</h2>
+						<ul class="personal_list">
+							<li>
+								<img src="images/placeholders/138x138.gif" alt="" class="thumb"/>
+								<div class="inner">
+									<h4>Jesica Thompson</h4>
+									<div class="grey_area"><span>0040 742 016 756,</span><span>0040 742 016 756</span></div>
+									<div class="fL">Location: Berlin, Germany</div>
+									<div class="fR"><a href="mailto:#" class="markered">Contact via e-mail </a></div>
+								</div>
+							</li>
+							<li class="last">
+								<img src="images/placeholders/138x138.gif" alt="" class="thumb"/>
+								<div class="inner">
+									<h4>Jesica Thompson</h4>
+									<div class="grey_area"><span>0040 742 016 756,</span><span>0040 742 016 756</span></div>
+									<div class="fL">Location: Berlin, Germany</div>
+									<div class="fR"><a href="mailto:#" class="markered">Contact via e-mail </a></div>
+								</div>
+							</li>
+							<li>
+								<img src="images/placeholders/138x138.gif" alt="" class="thumb"/>
+								<div class="inner">
+									<h4>Jesica Thompson</h4>
+									<div class="grey_area"><span>0040 742 016 756,</span><span>0040 742 016 756</span></div>
+									<div class="fL">Location: Berlin, Germany</div>
+									<div class="fR"><a href="mailto:#" class="markered">Contact via e-mail </a></div>
+								</div>
+							</li>
+							<li class="last">
+								<img src="images/placeholders/138x138.gif" alt="" class="thumb"/>
+								<div class="inner">
+									<h4>Jesica Thompson</h4>
+									<div class="grey_area"><span>0040 742 016 756,</span><span>0040 742 016 756</span></div>
+									<div class="fL">Location: Berlin, Germany</div>
+									<div class="fR"><a href="mailto:#" class="markered">Contact via e-mail </a></div>
+								</div>
+							</li>
+						</ul>
+					</div> {% endcomment %}
+				</div>
+			</div>
+		</div>
+		{% endblock %}

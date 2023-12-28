@@ -1,0 +1,111 @@
+{% load catalog_tags %}
+
+<div class="search_auto">
+    <form action="{% url 'catalog:filter' %}" method='get'>
+    <h3><strong>Search</strong> auto</h3>
+    <div class="categories">
+        <input type="radio" id="search_radio_1" checked="checked" name="category"/>
+        <label for="search_radio_1" class="search_radio_1"></label>
+        <input type="radio" id="search_radio_2" name="category"/>
+        <label for="search_radio_2" class="search_radio_2"></label>
+        <input type="radio" id="search_radio_3" name="category"/>
+        <label for="search_radio_3" class="search_radio_3"></label>
+        <input type="radio" id="search_radio_4" name="category"/>
+        <label for="search_radio_4" class="search_radio_4"></label>
+    </div>
+    <div class="clear"></div>
+    <label><strong>Manufacturer:</strong></label>
+    <div class="select_box_1">
+        <select name="car_brand_id" class="select_3">
+            <option value="0">Any</option>
+            {% all_brands as brands %}
+            {% for brand in brands %}
+            <option value="{{ brand.id }}">{{ brand.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <label><strong>Model:</strong></label>
+    <div class="select_box_1">
+        <select class="select_3">
+            <option value="0">Any</option>
+            {% for car in cars %}
+            <option value="{{ car.id }}">{{ car.car_model }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <label><strong>Year:</strong></label>
+    <div class="select_box_2">
+        <select class="select_4" name='car_year_from'>
+            <option value="0">From</option>
+            {% all_cars_fabrication as cars_tag %}
+            {% for car in cars_tag %}
+            <option value="{{ car.fabrication }}"> {{ car.fabrication }} </option>
+            {% endfor %}
+        </select>
+        <select class="select_4" name='car_year_to'>
+            <option value="0">To</option>
+            {% all_cars_fabrication as cars_tag %}
+            {% for car in cars_tag %}
+            <option value="{{ car.fabrication }}"> {{ car.fabrication }} </option>
+            {% endfor %}
+        </select>
+        <div class="clear"></div>
+    </div>
+    <label><strong>Price:</strong></label>
+    <div class="select_box_2">
+       {% min_car_price as min_car_price %}
+        {% max_car_price as max_car_price %}
+        <label id='output_min_price'for="min_price_point">{{ price_from }}</label>
+        <input type="range" id="min_price_input" name="min_price_point" min='{{ min_car_price }}' max='{{ max_car_price }}' value= '{{min_car_price}}'></input>
+        {% comment %} <select class="select_4" name='min_price_point' >
+            <option value="0">From</option>
+            {% min_car_price as min_car_price %}
+            {% max_car_price as max_car_price %}
+            <option value="{{ min_car_price.price }}">{{ min_car_price.price }}</option>
+            <option value="10000">10000</option>
+            <option value="20000">20000</option>
+            <option value="35000">35000</option>
+            <option value="50000">50000</option>
+            <option value="70000">70000</option>
+            <option value="100000">100000</option>
+            <option value="{{ max_car_price.price }}">{{ max_car_price.price }}</option>
+        </select> {% endcomment %}
+        {% min_car_price as min_car_price %}
+        {% max_car_price as max_car_price %}
+        <label id='output_max_price' for="max_price_point">{{ price_to }}</label>
+        <input type="range"  id="max_price_input" name="max_price_point" min='{{ min_car_price }}' max='{{ max_car_price }}'  value='{{ max_car_price}}'></input>
+        {% comment %} <select class="select_4" name='max_price_point' >
+            <option value="{{ max_car_price.price }}">to</option>
+            {% min_car_price as min_car_price %}
+            {% max_car_price as max_car_price %}
+            <option value="{{ min_car_price.price }}">{{ min_car_price.price }}</option>
+            <option value="10000">10000</option>
+            <option value="20000">20000</option>
+            <option value="35000">35000</option>
+            <option value="50000">50000</option>
+            <option value="70000">70000</option>
+            <option value="100000">100000</option>
+            <option value="{{ max_car_price.price }}">{{ max_car_price.price }}</option>
+        </select> {% endcomment %}
+        <div class="clear"></div>
+    </div>
+    <input type="submit" value="Search" class="btn_search"/>
+    <div class="clear"></div>
+</div>
+</form>
+
+<script>
+    var input_min_price = document.getElementById("min_price_input");
+    var output_min_price = document.getElementById("output_min_price");
+    var input_max_price = document.getElementById("max_price_input");
+    var output_max_price = document.getElementById("output_max_price");
+
+    input_min_price.addEventListener("input", function() {
+        output_min_price.textContent = input_min_price.value;
+    });
+    input_max_price.addEventListener("input", function() {
+        output_max_price.textContent = input_max_price.value;
+    });
+
+</script>

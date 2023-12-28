@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+	<!--BEGIN CONTENT-->
+
+{% block content %}
+		<div id="content">
+			<div class="content">
+				<div class="breadcrumbs">
+					<a href="{% url 'index' %}">Home</a>
+					<img src="{% static 'images/marker_2.gif' %}" alt=""/>
+					<a href="{% url 'dealer:dealers' %}">Dealers</a>
+					<img src="{% static 'images/marker_2.gif' %}" alt=""/>
+					<span>{{dealer.name}}</span>
+				</div>
+				<div class="main_wrapper">
+					<h1><strong>Dealer</strong>  {{ dealer.name }}</h1>
+					<div class="blog">
+						<div>
+							<img src="{{ dealer.picture.url }}" alt=""/>
+
+
+						</div>
+						<div class="offers">
+							<div class="count"><strong>Offers: </strong>{{dealer_cars.count}}</div>
+							<a href="#" class="all">view all offers</a>
+						</div>
+						<ul class="dealer_catalog">
+							{% for car in dealer_cars %}
+							<li>
+								<a href="{{ car.get_absolute_url }}" class="thumb">
+									<img height="150" width="180" src="{{ car.get_first_photo }} "  alt=""/></a>
+								<div class="catalog_desc">
+									<div class="location">Location: Berlin, Germany</div>
+									<div class="title_box">
+										<h4><a href="{{ car.get_absolute_url }}">{{car.brand}} {{ car.car_model }}</a></h4>
+										<div class="price">{{ car.price }} EURO</div>
+									</div>
+									<div class="clear"></div>
+									<div class="grey_area">
+										<span>Registration: {{ car.fabrication }}</span><br>
+										<span>Engine: {{ car.engine}} {{ car.fuel }}</span><br>
+										<span>Body: {{ car.body_type }}</span>
+									</div>
+									<a href="{{ car.get_absolute_url }}" class="more markered">View details</a>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+						<div class="dealer_bottom">
+							{% include "includes/paginator.html" %}    
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="sidebar">
+						<div class="widget grey">
+							<h2>About <strong>{{ dealer.name }}</strong></h2>
+							<div class="post">
+								{{dealer.description}}
+							</div>
+						</div>
+						<div class="widget contacts_widget">
+							<h2><strong>Contact</strong> details</h2>
+							<div class="addr detail">Berlin, Germany, nr. 250330,<br/>main street</div>
+							<div class="phones detail">0040 742 016 756<br/>0040 742 016 756</div>
+							<div class="email detail single_line"><a href="mailto:#" class="markered">office@autodealer.com</a></div>
+							<div class="web detail single_line"><a href="#">http://www.autodealer.com</a></div>
+						</div>
+						<div class="widget_divider"></div>
+						<div class="widget schedule_widget">
+							<h2><strong>Schedule</strong></h2>
+							<ul>
+								<li>
+									Monday
+									<span>09:00-18:00</span>
+								</li>
+								<li>
+									Tuesday
+									<span>09:00-18:00</span>
+								</li>
+								<li>
+									Wednesday
+									<span>09:00-18:00</span>
+								</li>
+								<li>
+									Thursday
+									<span>09:00-18:00</span>
+								</li>
+								<li>
+									Friday
+									<span>09:00-18:00</span>
+								</li>
+								<li>
+									Saturday
+									<span>10:00-14:00</span>
+								</li>
+								<li>
+									Sunday
+									<span>Closed</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

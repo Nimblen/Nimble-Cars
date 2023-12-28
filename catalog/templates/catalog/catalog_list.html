@@ -1,0 +1,27 @@
+
+						<ul class="catalog_table">
+							{% if cars %}
+							{% for car in cars %}
+							<li>
+								<a href="{{ car.get_absolute_url }}" class="thumb">
+									<img height="150" width="180" src="{{ car.get_first_photo }} "  alt=""/></a>
+								<div class="catalog_desc">
+									<div class="location">Location: Berlin, Germany</div>
+									<div class="title_box">
+										<h4><a href="{{ car.get_absolute_url }}">{{car.brand}} {{ car.car_model }}</a></h4>
+										<div class="price">{{ car.price }} EURO</div>
+									</div>
+									<div class="clear"></div>
+									<div class="grey_area">
+										<span>Registration: {{ car.fabrication }}</span><br>
+										<span>Engine: {{ car.engine}} {{ car.fuel }}</span><br>
+										<span>Body: {{ car.body_type }}</span>
+									</div>
+									<a href="{{ car.get_absolute_url }}" class="more markered">View details</a>
+								</div>
+							</li>
+							{% endfor %}
+							{% else %}
+							<h3><strong> unfortunately there are no cars yet </strong></h3>
+							{% endif %}
+						</ul>

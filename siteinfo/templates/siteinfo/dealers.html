@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+	<!--BEGIN CONTENT-->
+		<div id="content">
+			<div class="content">
+				<div class="wrapper_4">
+					<div class="">
+						<div class="recent_cars four_columns">
+							<h2><strong>Cars</strong> dealers</h2>
+							<ul>
+								{% for dealer in dealers %}
+								<li {% if forloop.counter|divisibleby:4 %} class = 'last' {% endif %}>
+									<a href="{{dealer.get_absolute_url}}">
+										<img src="{{ dealer.picture.url }}" height="150" width="150" alt=""/>
+										<div class="description">{{ dealer.description|truncatewords:30|linebreaks }}</div>
+										<div class="title">{{ dealer.name }}</div>
+									</a>
+								</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+				{% comment %} <div class="services">
+					<div class="service service_1">
+						<h2><strong>Delivery</strong> on time</h2>
+						<p>Lorem ipsum dolo stet consectetur adipiscin elit. Vestibulu dictum, vulputate ullamcoper lorem ipsum dolo stet.</p>
+						<a href="#" class="more">More</a>
+					</div>
+					<div class="service service_2 center">
+						<h2><strong>Quality</strong> service</h2>
+						<p>Lorem ipsum dolo stet consectetur adipiscin elit. Vestibulu dictum, vulputate ullamcoper lorem ipsum dolo stet.</p>
+						<a href="#" class="more">More</a>
+					</div>
+					<div class="service service_3">
+						<h2><strong>Retro</strong> cars</h2>
+						<p>Lorem ipsum dolo stet consectetur adipiscin elit. Vestibulu dictum, vulputate ullamcoper lorem ipsum dolo stet.</p>
+						<a href="#" class="more">More</a>
+					</div>
+				</div> {% endcomment %}
+
+			</div>
+		</div>
+	<!--EOF CONTENT-->
+{% endblock %}

@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% load static %}
+	<!--EOF HEADER-->
+{% block content %}
+	<!--BEGIN CONTENT-->
+		<div id="content">
+			<div class="content">
+				<div class="wrapper_1">
+					<div class="slider_wrapper">
+						<div class="home_slider">
+							<div class="slider slider_1">
+								{% for car in cars %}
+								<div class="slide">
+									<a href='{{car.get_absolute_url}}'>
+									<img src="{{ car.get_first_photo }}" alt=""/>
+									<div class="description">
+										<h2 class="title">{{ car.brand.name }} {{ car.car_model }} {{ car.fabrication }}</h2>
+										<p class="desc"><span><strong>Engine: </strong>{{car.engine}}</span></p>
+										<div class="price">${{ car.price }}</div>
+									</div>
+								</a>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+					<div class="search_auto_wrapper">
+						{% include "catalog/includes/filter_car_form.html" %}
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="recent">
+					<h2><strong>Recent</strong> listings</h2>
+					<div class="recent_carousel">
+						{% for car in top_cars %}
+						<div class="slide">
+							<a href="{{ car.get_absolute_url }}">
+								<img src="{{ car.get_first_photo }}" alt=""/>
+								<div class="description">Registration {{car.fabrication}}<br/>{{ car.fuel }}<br/>Body {{car.body_type.name}}<br/>{{car.max_speed}} km/h</div>
+								<div class="title">{{car.brand.name}} {{car.car_model}} <span class="price">$ {{ car.price }}</span></div>
+							</a>
+						</div>
+						{% endfor %}
+
+
+
+					</div>
+				</div>
+				{% comment %} <div class="banners">
+					<div class="banner_1 main_banner">
+						<div class="text_wrapper">
+							<p class="title"><strong>Looking</strong> for a car?</p>
+							<p class="desc">1.000 new offers every day. {{cars.count}} offers on site</p>
+						</div>
+						<a href="#">Search</a>
+					</div>
+					<div class="banner_2 main_banner">
+						<div class="text_wrapper">
+							<p class="title"><strong>Want</strong> to sell a car?</p>
+							<p class="desc">200.000 visitors every day. Add your offer now!</p>
+						</div>
+						<a href="#">Sell</a>
+					</div>
+				</div> {% endcomment %}
+				<div class="wrapper_2">
+					<div class="left">
+						<div class="recent_blog">
+							<h2><strong>Recent</strong> from the blog</h2>
+							{% for post in top_posts %}
+							<div class="{% if forloop.counter == 3 %} post_block last {% else %} post_block {% endif %}">
+								<a href="{{ post.get_absolute_url }}" class="thumb"><img src="{% if post.image %} {{ post.image.url }}{% else %}{% static 'images/placeholders/312x248.gif' %}{% endif %}" alt=""/></a>
+								<h5><a href="#">{{ post.title }}</a></h5>
+								<div class="date">{{ post.date}} </div>
+								<div class="post">{% autoescape off %}
+									<p>{{ post.body|truncatewords:30|linebreaks }}</p>
+									{% endautoescape %}</div>
+							</div>
+							{% endfor %}
+							<div class="clear"></div>
+						</div>
+						{% comment %} <div class="tabs_wrapper home_tabs section">
+						  	<ul class="tabs">
+						    	<li class="current">Dealers</li>
+						    	<li>Service Stations</li>
+						    	<li>Insurance</li>
+						 	</ul>
+						 	<div class="box visible">
+						 		<a href="#" class="all">Show all...</a>
+						   		<div class="results">Found 433 dealers</div>
+						   		<div class="clear"></div>
+						   		<div class="tabs_carousel">
+						   			<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+								</div>
+						  	</div>
+						  	<div class="box">
+						    	<a href="#" class="all">Show all...</a>
+						   		<div class="results">Found 50 stations</div>
+						   		<div class="clear"></div>
+						   		<div class="tabs_carousel">
+						   			<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+								</div>
+						  	</div>
+						  	<div class="box">
+						    	<a href="#" class="all">Show all...</a>
+						   		<div class="results">Found 10 incurances</div>
+						   		<div class="clear"></div>
+						   		<div class="tabs_carousel">
+						   			<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">St. Louis Auto Dealers</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Executive Cars Group</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Rim Wear</a>
+									</div>
+									<div class="slide">
+										<a href="#" class="img"><img src="images/placeholders/150x110.gif" alt=""/></a>
+										<a href="#" class="title">Dj Cruz’s Auto Sales</a>
+									</div>
+								</div>
+						  	</div>
+						</div> {% endcomment %}
+						<div class="video_box">
+							<h2><strong>Video</strong> reviews</h2>
+							{% for video in videos %}
+							<div class="{% cycle 'post_block' 'post_block' 'post_block last' %}">
+								<div class="preview">
+									<a href="{{video.link}}">
+										<img src="{{ video.image.url }}" alt=""/>
+										<span class="hover"></span>
+										<img src="{% static 'images/video_play.png' %}" alt="" class="video_play"/>
+									</a>
+								</div>
+								<h5><a href="#">{{video.title}}</a></h5>
+								<div class="post"><p>{{video.duration}}</p></div>
+							</div>
+							{% endfor %}
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="right">
+						<div class="news_wrapper">
+							<div class="news">
+								<h2><strong>place for your advertising</strong></h2>
+								<div class="news_box">{% comment %}
+									<a href="#" class="thumb">
+										<img src="images/placeholders/180x135.gif" alt=""/>
+									</a>
+									<h5><a href="#">UNOFFICIAL PORSCHE 918 SPYDER PRICING POPS UP</a></h5>
+									<div class="date">November 1, 2012 </div>
+									<div class="post">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit... </p>
+									</div> {% endcomment %}
+									</div>
+
+
+							</div>
+						</div>
+						<div class="banners_wrapper">
+							<div class="get_news_box">
+								<h3><strong>Get</strong> daily posts</h3>
+								<form method="get" action="{% url 'dealer:add_email' %}">
+									<input type="text" name='email' onblur="if(this.value=='') this.value='Enter your email';" onfocus="if(this.value=='Enter your email') this.value='';" value="Enter your email" class="txb"/>
+									<input type="submit" value="subscribe" class="btn_subscribe"/>
+								</form>
+							</div>
+							<div class="side_banners">
+								<a href="#"><img src="{% static 'images/banners/banner.jpg' %}" alt=""/></a>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
