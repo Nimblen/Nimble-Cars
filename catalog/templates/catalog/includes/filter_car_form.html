@@ -17,7 +17,10 @@
     <label><strong>Manufacturer:</strong></label>
     <div class="select_box_1">
         <select name="car_brand_id" class="select_3">
-            <option value="0">Any</option>
+            {% if request.GET.car_brand_id %}
+            {% brand_name request.GET.car_brand_id as bn %}
+            {% endif %}
+            <option value="0">{% if request.GET.car_brand_id %}{{bn}}{% else %}Any {% endif %}</option>
             {% all_brands as brands %}
             {% for brand in brands %}
             <option value="{{ brand.id }}">{{ brand.name }}</option>
@@ -37,14 +40,14 @@
     <label><strong>Year:</strong></label>
     <div class="select_box_2">
         <select class="select_4" name='car_year_from'>
-            <option value="0">From</option>
+            <option value="1990">{% if request.GET.car_year_from %}  {{request.GET.car_year_from}} {% else %} From {%endif%} </option>
             {% all_cars_fabrication as cars_tag %}
             {% for car in cars_tag %}
             <option value="{{ car.fabrication }}"> {{ car.fabrication }} </option>
             {% endfor %}
         </select>
         <select class="select_4" name='car_year_to'>
-            <option value="0">To</option>
+            <option value="2024">{% if request.GET.car_year_to %}  {{request.GET.car_year_to}} {% else %} To {%endif%} </option>
             {% all_cars_fabrication as cars_tag %}
             {% for car in cars_tag %}
             <option value="{{ car.fabrication }}"> {{ car.fabrication }} </option>

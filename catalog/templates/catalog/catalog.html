@@ -90,16 +90,17 @@
                         <div class="sorting drop_list">
                             <strong>Sort by: </strong>
                             <div class="selected">
-                                <span><a href="?sort_by=date">Date</a></span>
+                                <span><a href="{{request.path}}" class="selected">{% if request.GET.sort_by %}{{ request.GET.sort_by }} {% else %} New orders {% endif %}</a></span>
                                 <ul>
-                                    <li><a href="?sort_by=date">Date</a></li>
-                                    <li><a href="?sort_by=price">Price</a></li>
-                                    <li><a href="?sort_by=name">Name</a></li>
-                                    <li><a href="?sort_by=brand">Manufacturer</a></li>
+                                <a href="?sort_by=fabrication"{% if sort_by == 'fabrication' %} class="selected"{% endif %}>Fabrication</a></br>
+                                    <a href="?sort_by=price"{% if sort_by == 'price' %} class="selected"{% endif %}>Price</a></br>
+                                    <a href="?sort_by=car_model"{% if sort_by == 'car_model' %} class="selected"{% endif %}>Car model</a></br>
+                                    <a href="?sort_by=brand"{% if sort_by == 'brand' %} class="selected" {% endif %} >Brand</a></br>
                                 </ul>
                             </div>
                             <div class="clear"></div>
                         </div>
+
                         <div class="view_on_page drop_list">
                             <strong>View on page:</strong>
                             <div class="selected">

@@ -20,6 +20,13 @@ def get_brands():
     return CarBrand.objects.all()
 
 
+@register.simple_tag(name='brand_name')
+def get_brands_by_id(brand_id = 1):
+    try:
+        return CarBrand.objects.get(id=brand_id).name
+    except CarBrand.DoesNotExist:
+        return 'Any'
+
 @register.simple_tag(name='all_cases')
 def get_cases():
     return Carcase.objects.all()

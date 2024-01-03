@@ -17,11 +17,10 @@ def index(request):
 
 
 
-def catalog(request, order_by=None, page_number=1, per_page=10):
-    if order_by:
-        order_cars = Car.objects.all().order_by("fabrication")
-    else:
-        order_cars = Car.objects.all().order_by("pk")
+def catalog(request, page_number=1, per_page=10):
+    sort_by = request.GET.get('sort_by', 'pk')  # значение по умолчанию - 'id'
+    if sort_by:
+        order_cars = Car.objects.all().order_by(sort_by)
     count_of_car = Car.objects.count()
     paginated_cars = paginate_objects(order_cars, page_number, per_page)
     context = {
