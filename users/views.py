@@ -24,7 +24,7 @@ def login(request):
         form = UserLoginForm()
 
     context = {'form': form}
-    return render(request, 'users/login2.html', context)
+    return render(request, 'users/login.html', context)
 
 
 def register(request):

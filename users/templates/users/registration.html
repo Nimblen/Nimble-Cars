@@ -1,57 +1,195 @@
-{% extends "base.html" %}
-{% block content %}
-<body>
-    {% if form.errors %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                    style="margin-top: 50px;">
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Registration</title>
+      <style>
+         @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  background: #f2f2f2;
+  /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
+}
+::selection{
+  background: #4158d0;
+  color: #fff;
+}
+.wrapper{
+  width: 380px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+}
+.wrapper .title{
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  user-select: none;
+  border-radius: 15px 15px 0 0;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+.wrapper form{
+  padding: 10px 30px 50px 30px;
+}
+.wrapper form .field{
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+.wrapper form .field input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  padding-left: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+.wrapper form .field input:focus,
+form .field input:valid{
+  border-color: #4158d0;
+}
+.wrapper form .field label{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+form .field input:focus ~ label,
+form .field input:valid ~ label{
+  top: 0%;
+  font-size: 16px;
+  color: #4158d0;
+  background: #fff;
+  transform: translateY(-50%);
+}
+form .content{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-around;
+}
+form .content .checkbox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form .content input{
+  width: 15px;
+  height: 15px;
+  background: red;
+}
+form .content label{
+  color: #262626;
+  user-select: none;
+  padding-left: 5px;
+}
+form .content .pass-link{
+  color: "";
+}
+form .field input[type="submit"]{
+  color: #fff;
+  border: none;
+  padding-left: 0;
+  margin-top: -10px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  transition: all 0.3s ease;
+}
+form .field input[type="submit"]:active{
+  transform: scale(0.95);
+}
+form .signup-link{
+  color: #262626;
+  margin-top: 20px;
+  text-align: center;
+}
+form .pass-link a,
+form .signup-link a{
+  color: #4158d0;
+  text-decoration: none;
+}
+form .pass-link a:hover,
+form .signup-link a:hover{
+  text-decoration: underline;
+}
+      </style>
+   </head>
+   <body>
+      <div class="wrapper">
+         <div class="title">
+            Registration
+         </div>
+         {% if form.errors %}
+                <div class="field" style="margin-left: 30px;">
                     {{ form.errors }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+
                 </div>
                 {% endif %}
-    <div class="search_auto">
-        <form action="{% url 'users:register' %}" method="post">
-            {% csrf_token %}
-            <h2>Registration Form</h2>
-            <div class="input-group">
-                <label for="{{ form.first_name.id_for_label }}"><strong>First Name:</strong></label>
-                {{ form.first_name }}
-            </div>
-            <div class="input-group">
-                <label for="{{ form.last_name.id_for_label }}"><strong>Last Name:</strong></label>
-                {{ form.last_name }}
-            </div>
-            <div class="input-group">
-                <label for="{{ form.username.id_for_label }}"><strong>Username:</strong></label>
-                {{ form.username }}
-            </div>
-            <div class="input-group">
-                <label for="{{ form.email.id_for_label }}"><strong>Email:</strong></label>
-                {{ form.email }}
-            </div>
-            <div class="input-group">
-                <label for="{{ form.phone_number1.id_for_label }}"><strong>Phone Number 1:</strong></label>
-                {{ form.phone_number1 }}
-            </div>
-            <div class="input-group">
-                <label for="{{ form.phone_number2.id_for_label }}"><strong>Phone Number 2:</strong></label>
-                {{ form.phone_number2 }}
-            </div>
-            <div class="input-group">
-                <label for="{{ form.password1.id_for_label }}"><strong>Password: </strong></label>
-                {{ form.password1 }}
-            </div>
-            <div class="input-group">
-                <label for="{{ form.password2.id_for_label }}"><strong>Password confirmation: </strong></label>
-                {{ form.password2 }}
-            </div>
-            <div class="input-group">
-                <button type="submit">Register</button>
-            </div>
-        </form>
-    </div>
-</body>
+         <form action="{% url 'users:register' %}" method="post">
+          {% csrf_token %}
+          <div class="field">
+              <label for="{{ form.first_name.id_for_label }}"></label>
+              {{ form.first_name }}
+          </div>
+          <div class="field">
+              <label for="{{ form.last_name.id_for_label }}"></label>
+              {{ form.last_name }}
+          </div>
+          <div class="field">
+              <label for="{{ form.username.id_for_label }}"></label>
+              {{ form.username }}
+          </div>
+          <div class="field">
+              <label for="{{ form.email.id_for_label }}"></label>
+              {{ form.email }}
+          </div>
+          <div class="field">
+              <label for="{{ form.phone_number1.id_for_label }}"></label>
+              {{ form.phone_number1 }}
+          </div>
+          <div class="field">
+              <label for="{{ form.phone_number2.id_for_label }}"></label>
+              {{ form.phone_number2 }}
+          </div>
+          <div class="field">
+              <label for="{{ form.password1.id_for_label }}"></label>
+              {{ form.password1 }}
+          </div>
+          <div class="field">
+              <label for="{{ form.password2.id_for_label }}"></label>
+              {{ form.password2 }}
+          </div>
+          <div class="field">
+            <input type="submit" value="Зарегистрировать">
+         </div>
+         <div class="signup-link">
+          <a href="{% url 'users:login' %}">Есть аккаунта? Авторизуйся!</a>
+       </div>
+      </form>
+      </div>
+   </body>
 </html>
-
-{% endblock %}
