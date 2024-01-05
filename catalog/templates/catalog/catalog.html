@@ -106,10 +106,10 @@
                             <div class="selected">
                                 <span>{% if products_count %} {{ products_count }} {% else %} 10 {% endif %}</span>
                                 <ul>
-                                    <p><a href="{% url 'catalog:paginator'  page_number=page_number per_page=10 %}">10</a></p>
-                                    <p><a href="{% url 'catalog:paginator'  page_number=page_number per_page=20 %}">20</a></p>
-                                    <p><a href="{% url 'catalog:paginator'  page_number=page_number per_page=50 %}">50</a></p>
-                                        <p><a href="{% url 'catalog:paginator'  page_number=page_number per_page=100 %}">100</a></p>
+                                    <p><a href="?{% change_params per_page=10 %}">10</a></p>
+                                    <p><a href="?{% change_params per_page=20 %}">20</a></p>
+                                    <p><a href="?{% change_params per_page=50 %}">50</a></p>
+                                        <p><a href="?{% change_params per_page=100 %}">100</a></p>
                                 </ul>
                             </div>
                             <div class="clear"></div>

@@ -1,4 +1,5 @@
 from django import template
+from django.utils.http import urlencode
 from catalog.models import  Car, CarBrand, Carcase
 
 
@@ -8,12 +9,11 @@ register = template.Library()
 
 
 
-@register.simple_tag(name='top_cars')
-def top_cars():
-
-    pass
-
-
+@register.simple_tag(takes_context=True)
+def change_params(context, **kwargs):
+    query = context['request'].GET.dict()
+    query.update(kwargs)
+    return urlencode(query)
 
 @register.simple_tag(name='all_brands')
 def get_brands():
@@ -73,3 +73,5 @@ def get_template(g = 'n'):
 # def show_list_layout():
 #     cars = all_cars()
 #     return {'cars': cars}
+
+

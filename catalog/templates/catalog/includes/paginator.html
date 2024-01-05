@@ -1,15 +1,18 @@
+{% load static %}
+{% load catalog_tags %}
 <div class="pagination">
     <ul>
     {% if cars.has_previous %}
-                <li><a href="{% url 'catalog:paginator' cars.previous_page_number products_count %}"></a></li>
+                <li><a href="?{% change_params page=cars.previous_page_number %}"></a></li>
         {% endif %}
         {% for page in cars.paginator.page_range %}
-        {% url 'catalog:paginator' page products_count as url %}
-        <li {% if request.path == url %} class="active" {% endif %}><a class="page-link" href="{{ url }}">{{ page }}</a></li>
+        {% if page >= cars.number|add:-2 and page <= cars.number|add:2 %}
+        <li {% if cars.number == page %} active {% endif %}><a class="page-link" href="?{% change_params page=page %}">{{ page }}</a></li>
+        {% endif %}
         {% endfor %}
         {% if  cars.has_next %}
         <li class="page-item">
-            <a class="page-link" href="{% url 'catalog:paginator' cars.next_page_number products_count %}"></a>
+            <a class="page-link" href="?{% change_params page=cars.next_page_number %}"></a>
         </li>
         {% endif %}
     </ul>

@@ -2,7 +2,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 
-
 def paginate_objects(objects, page_number, per_page):
     paginator = Paginator(objects, per_page)
     try:

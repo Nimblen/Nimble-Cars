@@ -17,17 +17,19 @@ def index(request):
 
 
 
-def catalog(request, page_number=1, per_page=10):
+def catalog(request):
     sort_by = request.GET.get('sort_by', 'pk')  # значение по умолчанию - 'id'
+    page = request.GET.get('page', 1)
+    per_page = request.GET.get('per_page', 10)
     if sort_by:
         order_cars = Car.objects.all().order_by(sort_by)
     count_of_car = Car.objects.count()
-    paginated_cars = paginate_objects(order_cars, page_number, per_page)
+    paginated_cars = paginate_objects(order_cars, page, per_page)
     context = {
         "cars": paginated_cars,
         "car_count": count_of_car,
         "products_count": per_page,
-        "page_number": page_number,
+        "page_number": page,
     }
     return render(request, "catalog/catalog.html", context)
 
