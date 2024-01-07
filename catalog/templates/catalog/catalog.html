@@ -78,12 +78,11 @@
                 <div class="main_catalog">
                     <div class="top_catalog_box">
                         <div class="switch">
-                            {% url 'catalog:catalog_list' as url %}
-                            {% if request.path == url %}
+                            {% if sort_view == 'n' %}
                             <span class="table_view"></span>
-                            <a href="{% url 'catalog:catalog_grid' %}"  class="list_view"></a>
+                            <a href="?g=y"  class="list_view"></a>
                             {% else %}
-                            <a href="{% url 'catalog:catalog_list' %}" class="table_view"></a>
+                            <a href="?g=n" class="table_view"></a>
                             <span class="list_view"></span>
                             {% endif %}
                         </div>
@@ -92,10 +91,10 @@
                             <div class="selected">
                                 <span><a href="{{request.path}}" class="selected">{% if request.GET.sort_by %}{{ request.GET.sort_by }} {% else %} New orders {% endif %}</a></span>
                                 <ul>
-                                <a href="?sort_by=fabrication"{% if sort_by == 'fabrication' %} class="selected"{% endif %}>Fabrication</a></br>
-                                    <a href="?sort_by=price"{% if sort_by == 'price' %} class="selected"{% endif %}>Price</a></br>
-                                    <a href="?sort_by=car_model"{% if sort_by == 'car_model' %} class="selected"{% endif %}>Car model</a></br>
-                                    <a href="?sort_by=brand"{% if sort_by == 'brand' %} class="selected" {% endif %} >Brand</a></br>
+                                <a href="?{% change_params sort_by='fabrication' %}" {% if sort_by == 'fabrication' %} class="selected"{% endif %}>Fabrication</a></br>
+                                    <a href="?{% change_params sort_by='price' %}"{% if sort_by == 'price' %} class="selected"{% endif %}>Price</a></br>
+                                    <a href="?{% change_params sort_by='car_model' %}"{% if sort_by == 'car_model' %} class="selected"{% endif %}>Car model</a></br>
+                                    <a href="?{% change_params sort_by='brand' %}"{% if sort_by == 'brand' %} class="selected" {% endif %} >Brand</a></br>
                                 </ul>
                             </div>
                             <div class="clear"></div>
@@ -117,13 +116,11 @@
                         {% include "catalog/includes/paginator.html" %}
 
                         <div class="clear"></div>
-                        {% get_template 'n' as list_temp %}
-
-                        {% url 'catalog:catalog_list' as url %}
-                        {% if request.path == url %}
+                        {% get_template sort_view as list_temp %}
+                        {% if sort_view == 'y' %}
                         {% include list_temp %}
                         {% else %}
-                        {% get_template 'y' as grid_temp %}
+                        {% get_template sort_view as grid_temp %}
                         {% include grid_temp %}
                         {% endif %}
 

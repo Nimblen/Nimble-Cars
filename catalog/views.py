@@ -21,6 +21,7 @@ def catalog(request):
     sort_by = request.GET.get('sort_by', 'pk')  # значение по умолчанию - 'id'
     page = request.GET.get('page', 1)
     per_page = request.GET.get('per_page', 10)
+    sort_view = request.GET.get('g', 'y')
     if sort_by:
         order_cars = Car.objects.all().order_by(sort_by)
     count_of_car = Car.objects.count()
@@ -30,6 +31,7 @@ def catalog(request):
         "car_count": count_of_car,
         "products_count": per_page,
         "page_number": page,
+        "sort_view": sort_view,
     }
     return render(request, "catalog/catalog.html", context)
 

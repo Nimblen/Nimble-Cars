@@ -71,7 +71,7 @@
 							<li {% if request.resolver_match.view_name == 'dealers' %} class="current"{% endif %}><a href="{% url 'dealer:dealers' %}">Dealer</a></li>
 							<li {% if request.resolver_match.view_name == 'blog:post_list' %} class="current"{% endif %} ><a href="{% url 'blog:post_list' %}">Blog</a></li>
 
-							<li {% if request.resolver_match.app_name == 'catalog' %} class="current"{% endif %} ><a href="{% url 'catalog:catalog_grid' %}">Catalog</a></li>
+							<li {% if request.resolver_match.app_name == 'catalog' %} class="current"{% endif %} ><a href="{% url 'catalog:catalog' %}">Catalog</a></li>
 							<li {% if request.resolver_match.view_name == 'contact' %} class="current"{% endif %} ><a href="{% url 'contact' %}">Contacts</a></li>
                             {% if user.is_superuser %}
                             <li {% if request.resolver_match.view_name == 'admin' %} class="current"{% endif %} ><a href="{% url 'admin:index' %}">AdPanel</a></li>
