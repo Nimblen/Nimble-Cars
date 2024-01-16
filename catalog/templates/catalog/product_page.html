@@ -8,7 +8,7 @@
 				<div class="breadcrumbs">
 					<a href="{% url 'index' %}">Home</a>
 					<img src="{% static 'images/marker_2.gif' %}" alt=""/>
-					<a href="{% url 'catalog:catalog_list' %}">Cars</a>
+					<a href="{% url 'catalog:catalog' %}">Cars</a>
 					<img src="{% static 'images/marker_2.gif' %}" alt=""/>
 					<a href="{% url 'dealer:dealer' car.brand.name %}">{{ car.brand.name }}</a>
 					<img src="{% static 'images/marker_2.gif' %}" alt=""/>

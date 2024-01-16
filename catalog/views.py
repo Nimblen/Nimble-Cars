@@ -1,9 +1,17 @@
+# import redis
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.db.models import Count
+# from django.conf import settings
 from .models import Car, CarBrand, Order, Photo, Visit, Video
 from .utils.paginator_utils import paginate_objects
 from blog.models import Post
+
+
+
+# r = redis.Redis(host=settings.REDIS_HOST,
+#                 port=settings.REDIS_PORT,
+#                 db=settings.REDIS_DB)
 
 
 def index(request):
@@ -44,6 +52,7 @@ def product(request, brand_slug, car_slug, car_id):
     ip_address = request.META.get("REMOTE_ADDR")
     Visit.objects.create(user=request.user, ip=ip_address, car_id=car_id)
     v = Visit.objects.filter(car_id=car_id).count()
+    #total_views = r.incr(f'Car:{Car.id}:views')
     similar_cars = Car.objects.filter(brand = brand_id)[:4]
     context = {"car": car, "visit": v, "photo": photo, "similar_cars": similar_cars}
     return render(request, "catalog/product_page.html", context)
