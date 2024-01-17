@@ -80,9 +80,9 @@
                         <div class="switch">
                             {% if sort_view == 'n' %}
                             <span class="table_view"></span>
-                            <a href="?g=y"  class="list_view"></a>
+                            <a href="?{% change_params g=y  %}"  class="list_view"></a>
                             {% else %}
-                            <a href="?g=n" class="table_view"></a>
+                            <a href="?{% change_params g=n %}" class="table_view"></a>
                             <span class="list_view"></span>
                             {% endif %}
                         </div>

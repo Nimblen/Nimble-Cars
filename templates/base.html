@@ -41,6 +41,18 @@
 	<script type="text/javascript" src="{% static 'js/jquery.countdown.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/jquery.checkbox.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/js.js' %}"></script>
+    <style>
+        .sub-menu {
+            position: absolute;
+            display: none;
+
+        }
+
+        li:hover .sub-menu {
+            display: block;
+
+        }
+        </style>
 </head>
 <body class="page">
 	<!--BEGIN HEADER-->
@@ -74,8 +86,12 @@
 							<li {% if request.resolver_match.app_name == 'catalog' %} class="current"{% endif %} ><a href="{% url 'catalog:catalog' %}">Catalog</a></li>
 							<li {% if request.resolver_match.view_name == 'contact' %} class="current"{% endif %} ><a href="{% url 'contact' %}">Contacts</a></li>
                             {% if user.is_superuser %}
-                            <li {% if request.resolver_match.view_name == 'admin' %} class="current"{% endif %} ><a href="{% url 'admin:index' %}">AdPanel</a></li>
-                            {% endif %}
+                            <li  {% if request.resolver_match.view_name == 'admin' %} class="current"{% endif %}  ><a href="{% url 'admin:index' %}">AdPanel</a>
+                                <ul  class="sub-menu">
+                                    <li ><a href="{% url 'blog:start_parser' %}">start_parser</a></li>
+                                </ul></li>
+                                 {% endif %}
+
 						</ul>
 					</div>
 					<div id="search_form">

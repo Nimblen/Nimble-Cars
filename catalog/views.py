@@ -95,6 +95,7 @@ def car_filter(request):
         "price_to": price_to,
         "page_number": 1,
         "car_count": queryset.count(),
+        "sort_view": 'y',
     }
     return render(
         request,

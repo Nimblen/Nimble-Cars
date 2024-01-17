@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
+from blog.services.scraper_for_blog import create_post
 from taggit.models import Tag
 from .models import Post, Comment, Visit
 from .forms import CommentPostForm
@@ -83,6 +85,11 @@ def to_get_comment(request, comment_id):
     selected_comment.delete()
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
+
+
+def start_parser(request):
+    create_post()  # Запуск парсера
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 def page_not_found_view(request, exception):
     return render(request, "server/404.html", status=404)
