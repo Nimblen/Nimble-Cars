@@ -69,6 +69,7 @@ def order_car(request, car_id):
 
 def car_filter(request):
     # Получаем значения фильтров из запроса
+    sort_view = request.GET.get('g', 'y')
     brand = int(request.GET.get("car_brand_id"))
     year_from = int(request.GET.get("car_year_from"))
     year_to = int(request.GET.get("car_year_to"))
@@ -95,7 +96,7 @@ def car_filter(request):
         "price_to": price_to,
         "page_number": 1,
         "car_count": queryset.count(),
-        "sort_view": 'y',
+        "sort_view": sort_view,
     }
     return render(
         request,

@@ -1,4 +1,5 @@
 import json
+from django.db import IntegrityError
 import requests
 from bs4 import BeautifulSoup
 from blog.models import Post
@@ -45,22 +46,28 @@ def create_post():
             description = description.text
         else:
             description = "description not found"
+        photo = soup.find("img", class_="sX8xPdQU")
+        if photo is not None:
+            photo = photo.content
+        else:
+            photo = "photo not found"
 
         text_list = soup.find_all("div", class_="jsx-3863504972 vikont")
         clear_text = ""
         for i in text_list:
             clear_text += i.text
-
         data = {
-            "title": title,
-            'author_id': 1,
-            'slug': art_slug,
-            'tags':'cars',
-            # "description": description,
-            # "header": header,
-            "body": description + clear_text + header,
-        }
-
+                "title": title,
+                'author_id': 1,
+                'slug': art_slug,
+                'tags':'cars',
+                'image': photo,
+                'status':'PB',
+                # "description": description,
+                # "header": header,
+                "body": description + clear_text + header,
+            }
+            
         #return Post.objects.create(**data)
 
 
@@ -70,7 +77,10 @@ def create_post():
 
         with open(f"{path}{art_slug}.json", encoding='utf-8') as f:
             template = json.load(f)
-
-            return Post.objects.create(**template)
+            try:
+                Post.objects.create(**template)
+            except IntegrityError:
+                print('Такой пост уже существует')
+            
 
 

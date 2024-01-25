@@ -27,15 +27,6 @@
             {% endfor %}
         </select>
     </div>
-    <label><strong>Model:</strong></label>
-    <div class="select_box_1">
-        <select class="select_3">
-            <option value="0">Any</option>
-            {% for car in cars %}
-            <option value="{{ car.id }}">{{ car.car_model }}</option>
-            {% endfor %}
-        </select>
-    </div>
 
     <label><strong>Year:</strong></label>
     <div class="select_box_2">

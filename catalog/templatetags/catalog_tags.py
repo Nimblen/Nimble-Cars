@@ -11,6 +11,16 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def change_params(context, **kwargs):
+    """
+    This function takes a context and a set of keyword arguments, and updates the context's GET query parameters with the given keyword arguments.
+
+    Parameters:
+    context (dict): The context dictionary passed to the template tag.
+    **kwargs (dict): A dictionary of keyword arguments, where each key is a query parameter name and the value is the parameter value.
+
+    Returns:
+    str: The updated query string, encoded as a URL.
+    """
     query = context['request'].GET.dict()
     query.update(kwargs)
     return urlencode(query)

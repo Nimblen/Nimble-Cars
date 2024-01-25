@@ -80,9 +80,9 @@
                         <div class="switch">
                             {% if sort_view == 'n' %}
                             <span class="table_view"></span>
-                            <a href="?{% change_params g=y  %}"  class="list_view"></a>
-                            {% else %}
-                            <a href="?{% change_params g=n %}" class="table_view"></a>
+                            <a href="?{% change_params g='y'  %}"  class="list_view"></a>
+                            {% elif sort_view == 'y'  %} 
+                            <a href="?{% change_params g='n' %}" class="table_view"></a>
                             <span class="list_view"></span>
                             {% endif %}
                         </div>
@@ -117,9 +117,9 @@
 
                         <div class="clear"></div>
                         {% get_template sort_view as list_temp %}
-                        {% if sort_view == 'y' %}
+                        {% if sort_view == 'n' %}
                         {% include list_temp %}
-                        {% else %}
+                        {% elif sort_view == 'y' %}
                         {% get_template sort_view as grid_temp %}
                         {% include grid_temp %}
                         {% endif %}
