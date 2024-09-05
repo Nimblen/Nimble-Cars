@@ -141,12 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'   # SMTP-сервер
-EMAIL_PORT = 587                # Порт SMTP-сервера
-EMAIL_USE_TLS = True            # Использование TLS для безопасного подключения
-EMAIL_HOST_USER = 'ahmedfaruhov@gmail.com'   # Ваша электронная почта
-EMAIL_HOST_PASSWORD = 'skjdvnkj135123$@#'  # Пароль для приложения или учетная запись Google
+
 
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
